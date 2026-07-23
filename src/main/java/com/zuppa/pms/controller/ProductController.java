@@ -3,6 +3,7 @@ package com.zuppa.pms.controller;
 import com.zuppa.pms.dto.ProductDto;
 import com.zuppa.pms.entity.User;
 import com.zuppa.pms.service.ProductService;
+import com.zuppa.pms.service.CloudinaryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private final CloudinaryService cloudinaryService;
 
     @GetMapping
     public ResponseEntity<List<ProductDto>> getAllProducts(@AuthenticationPrincipal User currentUser) {
@@ -56,28 +58,10 @@ public class ProductController {
             @AuthenticationPrincipal User currentUser
     ) {
         try {
-            // Create uploads directory if it doesn't exist
-            java.io.File uploadDir = new java.io.File("uploads");
-            if (!uploadDir.exists()) {
-                uploadDir.mkdirs();
-            }
-
-            // Generate unique filename
-            String originalFilename = file.getOriginalFilename();
-            String extension = originalFilename != null ? originalFilename.substring(originalFilename.lastIndexOf(".")) : "";
-            String fileName = java.util.UUID.randomUUID().toString() + extension;
-            
-            // Save file
-            java.nio.file.Path filePath = java.nio.file.Paths.get("uploads", fileName);
-            java.nio.file.Files.copy(file.getInputStream(), filePath, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
-            
-            // Construct URL
-            // Ensure the frontend accesses it via localhost:8081/uploads/filename
-            String imageUrl = "http://localhost:8081/uploads/" + fileName;
-            
+            String imageUrl = cloudinaryService.uploadImage(file);
             return ResponseEntity.ok(productService.updateProductImage(id, imageUrl, currentUser));
         } catch (java.io.IOException e) {
-            throw new RuntimeException("Failed to store file", e);
+            throw new RuntimeException("Failed to upload file to Cloudinary", e);
         }
     }
 }
