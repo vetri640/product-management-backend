@@ -8,6 +8,8 @@ D:\ZUPPA\backend\src\main\java\com\zuppa\pms\entity\Product.java
 D:\ZUPPA\backend\src\main\java\com\zuppa\pms\entity\User.java
 D:\ZUPPA\backend\src\main\java\com\zuppa\pms\controller\UserController.java
 D:\ZUPPA\backend\src\main\java\com\zuppa\pms\repository\ProductRepository.java
+D:\ZUPPA\backend\src\main\java\com\zuppa\pms\service\CloudinaryService.java
+D:\ZUPPA\backend\src\main\java\com\zuppa\pms\config\CloudinaryConfig.java
 D:\ZUPPA\backend\src\main\java\com\zuppa\pms\config\SecurityConfig.java
 D:\ZUPPA\backend\src\main\java\com\zuppa\pms\entity\Role.java
 D:\ZUPPA\backend\src\main\java\com\zuppa\pms\dto\AuthResponse.java

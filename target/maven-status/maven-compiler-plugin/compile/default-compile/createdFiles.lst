@@ -8,6 +8,8 @@ com\zuppa\pms\controller\ProductController.class
 com\zuppa\pms\security\CustomUserDetailsService.class
 com\zuppa\pms\controller\UserController.class
 com\zuppa\pms\dto\UserDto$UserDtoBuilder.class
+com\zuppa\pms\service\CloudinaryService.class
+com\zuppa\pms\config\CloudinaryConfig.class
 com\zuppa\pms\service\AuthService.class
 com\zuppa\pms\entity\User$UserBuilder.class
 com\zuppa\pms\entity\Product.class
@@ -17,6 +19,7 @@ com\zuppa\pms\controller\AuthController.class
 com\zuppa\pms\entity\Product$ProductBuilder.class
 com\zuppa\pms\service\ProductService.class
 com\zuppa\pms\dto\ProductDto.class
+com\zuppa\pms\config\WebMvcConfig.class
 com\zuppa\pms\repository\UserRepository.class
 com\zuppa\pms\dto\LoginRequest.class
 com\zuppa\pms\entity\User.class

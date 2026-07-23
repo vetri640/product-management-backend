@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final com.zuppa.pms.repository.ProductRepository productRepository;
 
     public List<UserDto> getAllUsers() {
         return userRepository.findAll().stream()
@@ -21,10 +22,16 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
+    @org.springframework.transaction.annotation.Transactional
     public void deleteUser(Long id) {
         if (!userRepository.existsById(id)) {
             throw new RuntimeException("User not found");
         }
+        
+        // Delete all products owned by this user to prevent foreign key constraint violations
+        java.util.List<com.zuppa.pms.entity.Product> userProducts = productRepository.findByUserId(id);
+        productRepository.deleteAll(userProducts);
+        
         userRepository.deleteById(id);
     }
 
